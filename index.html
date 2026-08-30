@@ -3,32 +3,36 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>leetfine · daily challenge fine tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>LeetFine — squad fine tracker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
   <style>
     :root {
-      --bg: #0D1117;
-      --surface: #141A21;
-      --surface-2: #1B222B;
-      --border: #2A323C;
-      --text: #E6EDF3;
-      --muted: #8B949E;
-      --accent: #FFA116;
-      --accent-dim: #4A3616;
-      --ok: #2CBB5D;
-      --ok-dim: #123321;
-      --danger: #FF4D6D;
-      --danger-dim: #3A1520;
-      --mono: 'JetBrains Mono', monospace;
-      --sans: 'Inter', sans-serif;
+      --bg: #F3F4FA;
+      --surface: #FFFFFF;
+      --surface-2: #F7F8FC;
+      --border: #E7E8F2;
+      --ink: #15162B;
+      --muted: #82849C;
+      --accent: #FF6B35;
+      --accent-soft: #FFE7DA;
+      --mint: #00C08A;
+      --mint-soft: #D9F7EC;
+      --purple: #7C5CFC;
+      --purple-soft: #ECE7FF;
+      --blue: #2F8FFF;
+      --blue-soft: #E2EFFF;
+      --danger: #FF3B5C;
+      --sora: 'Sora', sans-serif;
+      --inter: 'Inter', sans-serif;
     }
 
     * {
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html,
@@ -38,314 +42,360 @@
     }
 
     body {
-      background:
-        radial-gradient(circle at 10% -10%, rgba(255, 161, 22, 0.08), transparent 40%),
-        radial-gradient(circle at 90% 0%, rgba(44, 187, 93, 0.06), transparent 35%),
-        var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--inter);
       min-height: 100vh;
-      padding: 20px 14px 60px;
-    }
-
-    .wrap {
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    /* header */
-    header {
-      margin-bottom: 22px;
-    }
-
-    .eyebrow {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--accent);
-      letter-spacing: .08em;
       display: flex;
-      align-items: center;
-      gap: 8px;
+      justify-content: center;
     }
 
-    .eyebrow .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--ok);
-      box-shadow: 0 0 8px var(--ok);
-    }
-
-    h1 {
-      font-family: var(--mono);
-      font-weight: 800;
-      font-size: clamp(22px, 6vw, 30px);
-      margin: 6px 0 4px;
-      letter-spacing: -0.02em;
-    }
-
-    h1 span {
-      color: var(--accent);
-    }
-
-    .sub {
-      color: var(--muted);
-      font-size: 13.5px;
-      line-height: 1.5;
-      max-width: 52ch;
-    }
-
-    /* terminal card */
-    .terminal {
+    .phone {
+      width: 100%;
+      max-width: 440px;
+      min-height: 100vh;
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.6);
-      margin-bottom: 22px;
+      box-shadow: 0 0 60px rgba(21, 22, 43, 0.08);
+      position: relative;
+      display: flex;
+      flex-direction: column;
     }
 
-    .term-bar {
-      background: var(--surface-2);
-      padding: 10px 14px;
+    /* app bar */
+    .appbar {
+      padding: 20px 20px 14px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: space-between;
+      background: var(--surface);
+      position: sticky;
+      top: 0;
+      z-index: 5;
       border-bottom: 1px solid var(--border);
     }
 
-    .term-bar .tdot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    .tdot.r {
-      background: #FF5F56;
-    }
-
-    .tdot.y {
-      background: #FFBD2E;
-    }
-
-    .tdot.g {
-      background: #27C93F;
-    }
-
-    .term-title {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--muted);
-      margin-left: 6px;
-    }
-
-    .term-body {
-      padding: 18px;
-    }
-
-    .prompt-line {
-      font-family: var(--mono);
-      font-size: 12.5px;
-      color: var(--ok);
-      margin-bottom: 16px;
-    }
-
-    .prompt-line .arg {
-      color: var(--text);
-    }
-
-    .field {
-      margin-bottom: 16px;
-    }
-
-    .field label {
-      display: block;
-      font-family: var(--mono);
-      font-size: 11.5px;
-      color: var(--muted);
-      text-transform: lowercase;
-      letter-spacing: .03em;
-      margin-bottom: 7px;
-    }
-
-    select,
-    input[type="date"],
-    input[type="number"],
-    input[type="text"] {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: 15px;
-      padding: 12px 12px;
-      border-radius: 8px;
-      outline: none;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-
-    select:focus,
-    input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(255, 161, 22, 0.15);
-    }
-
-    .name-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-    }
-
-    .name-pill {
-      font-family: var(--mono);
-      font-size: 13px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 11px 4px;
-      border-radius: 8px;
-      text-align: center;
-      cursor: pointer;
-      user-select: none;
-      transition: .12s;
-    }
-
-    .name-pill:hover {
-      border-color: var(--accent);
-      color: var(--text);
-    }
-
-    .name-pill.active {
-      background: var(--accent-dim);
-      border-color: var(--accent);
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    .date-row {
-      display: flex;
-      gap: 8px;
-    }
-
-    .date-row input {
-      flex: 1;
-    }
-
-    .chip {
-      font-family: var(--mono);
-      font-size: 12px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 0 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .chip:hover {
-      color: var(--text);
-      border-color: var(--accent);
-    }
-
-    .chip.active {
-      border-color: var(--ok);
-      color: var(--ok);
-      background: var(--ok-dim);
-    }
-
-    .amount-row {
+    .brand {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .amount-row input {
-      flex: 1;
-    }
-
-    .amount-badge {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--muted);
+    .mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
       display: flex;
       align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-
-    .toggle {
-      width: 34px;
-      height: 20px;
-      border-radius: 20px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      position: relative;
-      cursor: pointer;
+      justify-content: center;
+      font-family: var(--sora);
+      font-weight: 800;
+      color: #fff;
+      font-size: 16px;
       flex: none;
     }
 
-    .toggle::after {
-      content: '';
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 14px;
-      height: 14px;
+    .brand-text h1 {
+      font-family: var(--sora);
+      font-size: 17px;
+      font-weight: 800;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-text p {
+      margin: 0;
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+
+    .avatars-mini {
+      display: flex;
+    }
+
+    .avatars-mini .av {
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
-      background: var(--muted);
+      border: 2px solid var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sora);
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      margin-left: -8px;
+    }
+
+    /* views */
+    .view {
+      display: none;
+      padding: 18px 20px 100px;
+      flex: 1;
+    }
+
+    .view.active {
+      display: block;
+      animation: fadein .25s ease;
+    }
+
+    @keyframes fadein {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-title {
+      font-family: var(--sora);
+      font-size: 15px;
+      font-weight: 700;
+      margin: 22px 0 12px;
+    }
+
+    .section-title:first-child {
+      margin-top: 4px;
+    }
+
+    .hint {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin: -6px 0 16px;
+      line-height: 1.5;
+    }
+
+    /* avatar picker */
+    .avatar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .avatar-pick {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+    }
+
+    .avatar-pick .circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sora);
+      font-weight: 800;
+      font-size: 19px;
+      color: #fff;
+      border: 3px solid transparent;
       transition: .15s;
     }
 
-    .toggle.on {
-      border-color: var(--accent);
-      background: var(--accent-dim);
+    .avatar-pick.selected .circle {
+      border-color: var(--ink);
+      transform: scale(1.06);
     }
 
-    .toggle.on::after {
-      transform: translateX(14px);
-      background: var(--accent);
+    .avatar-pick span {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
     }
 
-    .btn {
-      width: 100%;
-      background: var(--accent);
-      color: #1a1200;
-      font-family: var(--mono);
-      font-weight: 700;
-      font-size: 14.5px;
-      border: none;
-      border-radius: 8px;
+    .avatar-pick.selected span {
+      color: var(--ink);
+    }
+
+    /* date pills */
+    .date-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
       padding: 14px;
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .pill {
+      flex: 1;
+      text-align: center;
+      padding: 10px 6px;
+      border-radius: 11px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1.5px solid var(--border);
       cursor: pointer;
+    }
+
+    .pill.active {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    .date-custom {
+      position: relative;
+    }
+
+    .date-custom input {
+      width: 100%;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 11px;
+      padding: 11px 12px;
+      font-family: var(--inter);
+      font-size: 14.5px;
+      color: var(--ink);
+    }
+
+    /* amount card */
+    .amount-card {
+      background: linear-gradient(135deg, var(--ink), #2A2C4C);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .amount-left .lbl {
+      font-size: 11px;
+      color: #B9BAD1;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      font-weight: 600;
+    }
+
+    .amount-display {
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+      margin-top: 4px;
+    }
+
+    .amount-display .rs {
+      font-family: var(--sora);
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .amount-display input {
+      background: none;
+      border: none;
+      color: #fff;
+      font-family: var(--sora);
+      font-size: 32px;
+      font-weight: 800;
+      width: 110px;
+      outline: none;
+      padding: 0;
+    }
+
+    .edit-toggle {
+      width: 44px;
+      height: 26px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      position: relative;
+      cursor: pointer;
+      flex: none;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .edit-toggle::after {
+      content: '✎';
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      color: var(--ink);
+      transition: .15s;
+    }
+
+    .edit-toggle.on {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .edit-toggle.on::after {
+      transform: translateX(18px);
+    }
+
+    /* note */
+    .note-field {
+      width: 100%;
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 13px 14px;
+      font-family: var(--inter);
+      font-size: 14.5px;
+      color: var(--ink);
+    }
+
+    .note-field::placeholder {
+      color: var(--muted);
+    }
+
+    .cta {
+      width: 100%;
+      margin-top: 22px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 16px;
+      padding: 16px;
+      font-family: var(--sora);
+      font-weight: 700;
+      font-size: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transition: .12s;
+      cursor: pointer;
+      box-shadow: 0 10px 24px -8px rgba(255, 107, 53, 0.55);
     }
 
-    .btn:hover {
-      filter: brightness(1.08);
-    }
-
-    .btn:disabled {
-      opacity: .55;
+    .cta:disabled {
+      opacity: .6;
       cursor: wait;
+      box-shadow: none;
     }
 
-    .btn .spin {
-      width: 14px;
-      height: 14px;
+    .cta .spin {
+      width: 15px;
+      height: 15px;
       border-radius: 50%;
-      border: 2px solid rgba(0, 0, 0, .3);
-      border-top-color: #1a1200;
+      border: 2px solid rgba(255, 255, 255, .4);
+      border-top-color: #fff;
       animation: spin .7s linear infinite;
       display: none;
     }
 
-    .btn.loading .spin {
+    .cta.loading .spin {
       display: inline-block;
     }
 
@@ -355,292 +405,384 @@
       }
     }
 
-    .status {
-      font-family: var(--mono);
-      font-size: 12.5px;
-      margin-top: 12px;
-      padding: 10px 12px;
-      border-radius: 8px;
+    .toast {
+      margin-top: 14px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
       display: none;
+      text-align: center;
     }
 
-    .status.ok {
+    .toast.ok {
       display: block;
-      background: var(--ok-dim);
-      color: var(--ok);
-      border: 1px solid #1c5c34;
+      background: var(--mint-soft);
+      color: #00795A;
     }
 
-    .status.err {
+    .toast.err {
       display: block;
-      background: var(--danger-dim);
-      color: var(--danger);
-      border: 1px solid #6e2130;
+      background: #FFE3E8;
+      color: #C81A3C;
     }
 
     /* dashboard */
-    .dash-head {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin: 34px 0 12px;
+    .hero-card {
+      background: linear-gradient(135deg, var(--purple), var(--accent));
+      border-radius: 20px;
+      padding: 22px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
     }
 
-    .dash-head h2 {
-      font-family: var(--mono);
-      font-size: 15px;
-      margin: 0;
-      color: var(--text);
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      right: -30px;
+      top: -30px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
     }
 
-    .refresh {
-      font-family: var(--mono);
-      font-size: 11.5px;
-      color: var(--muted);
-      background: none;
-      border: none;
-      cursor: pointer;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px;
-    }
-
-    .stat-card.total {
-      grid-column: 1/-1;
-      background: linear-gradient(135deg, var(--surface), var(--accent-dim));
-      border-color: #3a2a10;
-    }
-
-    .stat-label {
-      font-family: var(--mono);
-      font-size: 10.5px;
-      color: var(--muted);
+    .hero-lbl {
+      font-size: 12px;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: .06em;
+      color: rgba(255, 255, 255, 0.85);
     }
 
-    .stat-value {
-      font-family: var(--mono);
-      font-size: 26px;
+    .hero-amt {
+      font-family: var(--sora);
+      font-size: 38px;
       font-weight: 800;
       margin-top: 4px;
     }
 
-    .stat-card.total .stat-value {
-      color: var(--accent);
-      font-size: 32px;
-    }
-
-    .stat-sub {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--muted);
+    .hero-sub {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.85);
       margin-top: 2px;
     }
 
-    .entries {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
+    .board-list {
+      margin-top: 12px;
     }
 
-    .entry {
+    .board-row {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
       padding: 12px 14px;
-      border-bottom: 1px solid var(--border);
+      margin-bottom: 9px;
     }
 
-    .entry:last-child {
-      border-bottom: none;
-    }
-
-    .entry .who {
-      font-family: var(--mono);
-      font-weight: 700;
-      font-size: 13px;
-      width: 64px;
+    .board-row .circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
       flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sora);
+      font-weight: 800;
+      font-size: 14px;
+      color: #fff;
     }
 
-    .entry .meta {
+    .board-row .info {
       flex: 1;
       min-width: 0;
     }
 
-    .entry .d {
-      font-size: 12.5px;
-      color: var(--muted);
-      font-family: var(--mono);
+    .board-row .name {
+      font-weight: 700;
+      font-size: 13.5px;
     }
 
-    .entry .note {
-      font-size: 12px;
+    .bar-track {
+      height: 6px;
+      background: var(--border);
+      border-radius: 4px;
+      margin-top: 6px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    .board-row .amt {
+      font-family: var(--sora);
+      font-weight: 800;
+      font-size: 14.5px;
+      flex: none;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+
+    .activity-item .circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sora);
+      font-weight: 800;
+      font-size: 13px;
+      color: #fff;
+    }
+
+    .activity-item .meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .activity-item .name-line {
+      font-weight: 700;
+      font-size: 13.5px;
+    }
+
+    .activity-item .sub-line {
+      font-size: 11.5px;
       color: var(--muted);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .entry .amt {
-      font-family: var(--mono);
-      font-weight: 700;
+    .activity-item .amt-tag {
+      font-family: var(--sora);
+      font-weight: 800;
+      font-size: 13px;
       color: var(--danger);
-      font-size: 14px;
+      background: #FFE3E8;
+      padding: 5px 10px;
+      border-radius: 10px;
       flex: none;
     }
 
-    .empty {
-      padding: 26px 14px;
+    .empty-state {
+      padding: 28px 10px;
       text-align: center;
       color: var(--muted);
-      font-family: var(--mono);
-      font-size: 12.5px;
+      font-size: 13px;
     }
 
-    footer {
-      margin-top: 26px;
-      text-align: center;
-      font-family: var(--mono);
-      font-size: 11px;
-      color: #4d5560;
+    /* bottom nav */
+    .bottomnav {
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      padding: 10px 20px calc(10px + env(safe-area-inset-bottom));
+      gap: 6px;
     }
 
-    footer a {
+    .navbtn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      padding: 6px;
+      border-radius: 12px;
+      cursor: pointer;
       color: var(--muted);
     }
 
-    @media (max-width:400px) {
-      .name-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    .navbtn.active {
+      color: var(--accent);
+    }
+
+    .navbtn svg {
+      width: 21px;
+      height: 21px;
+    }
+
+    .navbtn .lbl {
+      font-size: 10.5px;
+      font-weight: 700;
+    }
+
+    footer.credit {
+      text-align: center;
+      padding: 10px 0 2px;
+      font-size: 10.5px;
+      color: var(--muted);
+    }
+
+    footer.credit a {
+      color: var(--muted);
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
+  <div class="phone">
 
-    <header>
-      <div class="eyebrow"><span class="dot"></span> MADEVA · AKSHAY · NITISH · VINAY</div>
-      <h1>leet<span>fine</span>.track</h1>
-      <div class="sub">Miss the daily LeetCode problem, pay ₹100 to Akshay's UPI for the team fund. Log it here,
-        everyone sees it instantly.</div>
-    </header>
-
-    <div class="terminal">
-      <div class="term-bar">
-        <div class="tdot r"></div>
-        <div class="tdot y"></div>
-        <div class="tdot g"></div>
-        <div class="term-title">submit-fine.sh</div>
+    <div class="appbar">
+      <div class="brand">
+        <div class="mark">₹</div>
+        <div class="brand-text">
+          <h1>LeetFine</h1>
+          <p>Madeva · Akshay · Nitish · Vinay</p>
+        </div>
       </div>
-      <div class="term-body">
-        <div class="prompt-line">$ ./submit-fine <span class="arg">--who --date --amount</span></div>
+      <div class="avatars-mini" id="miniAvatars"></div>
+    </div>
 
-        <div class="field">
-          <label>who missed it</label>
-          <div class="name-grid" id="nameGrid">
-            <div class="name-pill" data-name="Madeva">Madeva</div>
-            <div class="name-pill" data-name="Akshay">Akshay</div>
-            <div class="name-pill" data-name="Nitish">Nitish</div>
-            <div class="name-pill" data-name="Vinay">Vinay</div>
-          </div>
+    <!-- LOG VIEW -->
+    <div class="view active" id="view-log">
+      <div class="section-title">Who missed today?</div>
+      <div class="avatar-grid" id="nameGrid"></div>
+
+      <div class="section-title">When</div>
+      <div class="date-card">
+        <div class="pill-row">
+          <div class="pill" id="todayChip">Today</div>
+          <div class="pill" id="yestChip">Yesterday</div>
         </div>
-
-        <div class="field">
-          <label>date missed</label>
-          <div class="date-row">
-            <input type="date" id="dateInput">
-            <div class="chip" id="todayChip">today</div>
-            <div class="chip" id="yestChip">yesterday</div>
-          </div>
+        <div class="date-custom">
+          <input type="date" id="dateInput">
         </div>
+      </div>
 
-        <div class="field">
-          <label>amount (₹)</label>
-          <div class="amount-row">
+      <div class="section-title">Fine amount</div>
+      <div class="amount-card">
+        <div class="amount-left">
+          <div class="lbl">Amount due</div>
+          <div class="amount-display">
+            <span class="rs">₹</span>
             <input type="number" id="amountInput" value="100" readonly>
-            <div class="amount-badge">
-              edit <div class="toggle" id="amountToggle"></div>
-            </div>
           </div>
         </div>
+        <div class="edit-toggle" id="amountToggle"></div>
+      </div>
 
-        <div class="field">
-          <label>note (optional)</label>
-          <input type="text" id="noteInput" placeholder="e.g. slept through it 😅">
-        </div>
+      <div class="section-title">Note <span style="color:var(--muted);font-weight:400;">(optional)</span></div>
+      <input type="text" class="note-field" id="noteInput" placeholder="e.g. slept through it 😅">
 
-        <button class="btn" id="saveBtn">
-          <span class="spin"></span><span id="saveBtnLabel">save to sheet →</span>
-        </button>
-        <div class="status" id="statusBox"></div>
+      <button class="cta" id="saveBtn">
+        <span class="spin"></span><span id="saveBtnLabel">Log the fine →</span>
+      </button>
+      <div class="toast" id="statusBox"></div>
+    </div>
+
+    <!-- DASHBOARD VIEW -->
+    <div class="view" id="view-board">
+      <div class="hero-card">
+        <div class="hero-lbl">Total fines collected</div>
+        <div class="hero-amt" id="totalAmt">₹0</div>
+        <div class="hero-sub" id="totalCount">0 entries logged</div>
+      </div>
+
+      <div class="section-title">Leaderboard</div>
+      <div class="board-list" id="boardList"></div>
+
+      <div class="section-title">Recent activity</div>
+      <div id="entriesList"></div>
+    </div>
+
+    <div class="bottomnav">
+      <div class="navbtn active" id="navLog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+        <div class="lbl">Log</div>
+      </div>
+      <div class="navbtn" id="navBoard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M4 20V10M12 20V4M20 20v-7" />
+        </svg>
+        <div class="lbl">Board</div>
       </div>
     </div>
 
-    <div class="dash-head">
-      <h2>$ ./dashboard</h2>
-      <button class="refresh" id="refreshBtn">refresh</button>
-    </div>
-
-    <div class="stat-grid" id="statGrid">
-      <div class="stat-card total">
-        <div class="stat-label">total fines collected</div>
-        <div class="stat-value" id="totalAmt">₹0</div>
-        <div class="stat-sub" id="totalCount">0 entries</div>
-      </div>
-    </div>
-    <div class="stat-grid" id="perPersonGrid"></div>
-
-    <div class="dash-head" style="margin-bottom:8px;">
-      <h2>$ tail -f fines.log</h2>
-    </div>
-    <div class="entries" id="entriesList">
-      <div class="empty">loading entries…</div>
-    </div>
-
-    <footer>synced to google sheets · <a href="#" id="sheetLink" target="_blank">open sheet</a></footer>
+    <footer class="credit">synced to google sheets · <a href="#" id="sheetLink" target="_blank">open sheet</a></footer>
   </div>
 
   <script>
     /* ======================================================
        CONFIG — paste your Apps Script Web App URL here
-       (see SETUP.md for how to get this)
     ====================================================== */
     const GAS_URL = "https://script.google.com/macros/s/AKfycbwt7pqYPNMKr3RCCVbFUNQUIU1LTcFOMz2JeNUQeSoWJci52IB2KNUJ95167fFQxaCPew/exec";
     const SHEET_VIEW_URL = "https://docs.google.com/spreadsheets/d/1j4GSvppehND3T1ximJm11JUhQ8yQAiiKGqpD3SV1SHc/edit?pli=1&gid=0#gid=0";
 
-    const NAMES = ["Madeva", "Akshay", "Nitish", "Vinay"];
+    const MEMBERS = [
+      { name: "Madeva", color: "#7C5CFC" },
+      { name: "Akshay", color: "#FF6B35" },
+      { name: "Nitish", color: "#00C08A" },
+      { name: "Vinay", color: "#2F8FFF" }
+    ];
+    function initials(n) { return n.slice(0, 2).toUpperCase(); }
+    function colorFor(name) { const m = MEMBERS.find(x => x.name === name); return m ? m.color : "#82849C"; }
+
     let selectedName = null;
 
     document.getElementById('sheetLink').href = SHEET_VIEW_URL;
 
-    /* ---------- name pills ---------- */
-    document.querySelectorAll('.name-pill').forEach(el => {
+    /* mini avatars in app bar */
+    document.getElementById('miniAvatars').innerHTML = MEMBERS.map(m =>
+      `<div class="av" style="background:${m.color}">${initials(m.name)}</div>`
+    ).join('');
+
+    /* avatar picker */
+    const nameGrid = document.getElementById('nameGrid');
+    nameGrid.innerHTML = MEMBERS.map(m => `
+  <div class="avatar-pick" data-name="${m.name}">
+    <div class="circle" style="background:${m.color}">${initials(m.name)}</div>
+    <span>${m.name}</span>
+  </div>
+`).join('');
+    nameGrid.querySelectorAll('.avatar-pick').forEach(el => {
       el.addEventListener('click', () => {
-        document.querySelectorAll('.name-pill').forEach(p => p.classList.remove('active'));
-        el.classList.add('active');
+        nameGrid.querySelectorAll('.avatar-pick').forEach(p => p.classList.remove('selected'));
+        el.classList.add('selected');
         selectedName = el.dataset.name;
       });
     });
 
-    /* ---------- date helpers ---------- */
+    /* bottom nav switching */
+    const views = { log: document.getElementById('view-log'), board: document.getElementById('view-board') };
+    const navs = { log: document.getElementById('navLog'), board: document.getElementById('navBoard') };
+    function showView(key) {
+      Object.keys(views).forEach(k => {
+        views[k].classList.toggle('active', k === key);
+        navs[k].classList.toggle('active', k === key);
+      });
+      if (key === 'board') loadEntries();
+    }
+    navs.log.addEventListener('click', () => showView('log'));
+    navs.board.addEventListener('click', () => showView('board'));
+
+    /* date helpers */
     const dateInput = document.getElementById('dateInput');
     function toISO(d) { return d.toISOString().slice(0, 10); }
     function setDate(offsetDays, chip) {
@@ -659,7 +801,7 @@
       document.getElementById('yestChip').classList.remove('active');
     });
 
-    /* ---------- amount toggle ---------- */
+    /* amount toggle */
     const amountToggle = document.getElementById('amountToggle');
     const amountInput = document.getElementById('amountInput');
     amountToggle.addEventListener('click', () => {
@@ -668,20 +810,20 @@
       if (on) { amountInput.focus(); } else { amountInput.value = 100; }
     });
 
-    /* ---------- save ---------- */
+    /* save */
     const saveBtn = document.getElementById('saveBtn');
     const statusBox = document.getElementById('statusBox');
 
     saveBtn.addEventListener('click', async () => {
-      statusBox.className = 'status';
-      if (!selectedName) { showStatus('err', 'pick who missed it first'); return; }
-      if (!dateInput.value) { showStatus('err', 'pick a date'); return; }
+      statusBox.className = 'toast';
+      if (!selectedName) { showStatus('err', 'Pick who missed it first'); return; }
+      if (!dateInput.value) { showStatus('err', 'Pick a date'); return; }
       const amount = parseFloat(amountInput.value);
-      if (!amount || amount <= 0) { showStatus('err', 'enter a valid amount'); return; }
-      if (GAS_URL.includes('PASTE_YOUR')) { showStatus('err', 'app not connected to sheet yet — see SETUP.md'); return; }
+      if (!amount || amount <= 0) { showStatus('err', 'Enter a valid amount'); return; }
+      if (GAS_URL.includes('PASTE_YOUR')) { showStatus('err', 'App not connected to sheet yet — see SETUP.md'); return; }
 
       saveBtn.disabled = true; saveBtn.classList.add('loading');
-      document.getElementById('saveBtnLabel').textContent = 'saving…';
+      document.getElementById('saveBtnLabel').textContent = 'Saving…';
 
       const payload = {
         name: selectedName,
@@ -693,31 +835,30 @@
       try {
         const res = await fetch(GAS_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'text/plain' }, // avoids CORS preflight on Apps Script
+          headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify(payload)
         });
         const data = await res.json();
         if (data.ok) {
-          showStatus('ok', '✓ saved — ₹' + amount + ' logged for ' + selectedName);
+          showStatus('ok', '✓ Saved — ₹' + amount + ' logged for ' + selectedName);
           resetForm();
-          loadEntries();
         } else {
-          showStatus('err', data.error || 'could not save, try again');
+          showStatus('err', data.error || 'Could not save, try again');
         }
       } catch (err) {
-        showStatus('err', 'network error — check your connection');
+        showStatus('err', 'Network error — check your connection');
       }
       saveBtn.disabled = false; saveBtn.classList.remove('loading');
-      document.getElementById('saveBtnLabel').textContent = 'save to sheet →';
+      document.getElementById('saveBtnLabel').textContent = 'Log the fine →';
     });
 
     function showStatus(type, msg) {
-      statusBox.className = 'status ' + type;
+      statusBox.className = 'toast ' + type;
       statusBox.textContent = msg;
     }
 
     function resetForm() {
-      document.querySelectorAll('.name-pill').forEach(p => p.classList.remove('active'));
+      nameGrid.querySelectorAll('.avatar-pick').forEach(p => p.classList.remove('selected'));
       selectedName = null;
       document.getElementById('noteInput').value = '';
       amountInput.value = 100;
@@ -726,11 +867,12 @@
       setDate(0, document.getElementById('todayChip'));
     }
 
-    /* ---------- dashboard ---------- */
+    /* dashboard */
     async function loadEntries() {
       const listEl = document.getElementById('entriesList');
+      const boardEl = document.getElementById('boardList');
       if (GAS_URL.includes('PASTE_YOUR')) {
-        listEl.innerHTML = '<div class="empty">connect the sheet in SETUP.md to see entries</div>';
+        listEl.innerHTML = '<div class="empty-state">Connect the sheet in SETUP.md to see entries</div>';
         return;
       }
       try {
@@ -738,42 +880,56 @@
         const data = await res.json();
         renderDashboard(data.entries || []);
       } catch (err) {
-        listEl.innerHTML = '<div class="empty">could not load entries — refresh to retry</div>';
+        listEl.innerHTML = '<div class="empty-state">Could not load entries — pull to refresh</div>';
       }
+    }
+
+    function formatRelativeDate(iso) {
+      const today = toISO(new Date());
+      const yest = toISO(new Date(Date.now() - 86400000));
+      if (iso === today) return 'Today';
+      if (iso === yest) return 'Yesterday';
+      return iso;
     }
 
     function renderDashboard(entries) {
       const listEl = document.getElementById('entriesList');
+      const boardEl = document.getElementById('boardList');
       const total = entries.reduce((s, e) => s + Number(e.amount || 0), 0);
       document.getElementById('totalAmt').textContent = '₹' + total;
-      document.getElementById('totalCount').textContent = entries.length + ' entries';
+      document.getElementById('totalCount').textContent = entries.length + ' entries logged';
 
       const perPerson = {};
-      NAMES.forEach(n => perPerson[n] = 0);
+      MEMBERS.forEach(m => perPerson[m.name] = 0);
       entries.forEach(e => { perPerson[e.name] = (perPerson[e.name] || 0) + Number(e.amount || 0); });
+      const maxAmt = Math.max(1, ...Object.values(perPerson));
 
-      const grid = document.getElementById('perPersonGrid');
-      grid.innerHTML = NAMES.map(n => `
-    <div class="stat-card">
-      <div class="stat-label">${n}</div>
-      <div class="stat-value" style="font-size:20px;">₹${perPerson[n]}</div>
+      const sortedMembers = [...MEMBERS].sort((a, b) => perPerson[b.name] - perPerson[a.name]);
+      boardEl.innerHTML = sortedMembers.map(m => `
+    <div class="board-row">
+      <div class="circle" style="background:${m.color}">${initials(m.name)}</div>
+      <div class="info">
+        <div class="name">${m.name}</div>
+        <div class="bar-track"><div class="bar-fill" style="width:${(perPerson[m.name] / maxAmt * 100)}%;background:${m.color}"></div></div>
+      </div>
+      <div class="amt">₹${perPerson[m.name]}</div>
     </div>
   `).join('');
 
       if (entries.length === 0) {
-        listEl.innerHTML = '<div class="empty">no fines yet — everyone\'s clean 🎉</div>';
+        listEl.innerHTML = '<div class="empty-state">No fines yet — everyone\'s clean 🎉</div>';
         return;
       }
 
       const sorted = [...entries].reverse();
       listEl.innerHTML = sorted.map(e => `
-    <div class="entry">
-      <div class="who">${e.name}</div>
+    <div class="activity-item">
+      <div class="circle" style="background:${colorFor(e.name)}">${initials(e.name)}</div>
       <div class="meta">
-        <div class="d">${e.date}</div>
-        ${e.note ? `<div class="note">${escapeHtml(e.note)}</div>` : ''}
+        <div class="name-line">${e.name}</div>
+        <div class="sub-line">${formatRelativeDate(e.date)}${e.note ? ' · ' + escapeHtml(e.note) : ''}</div>
       </div>
-      <div class="amt">₹${e.amount}</div>
+      <div class="amt-tag">₹${e.amount}</div>
     </div>
   `).join('');
     }
@@ -784,7 +940,6 @@
       return d.innerHTML;
     }
 
-    document.getElementById('refreshBtn').addEventListener('click', loadEntries);
     loadEntries();
   </script>
 </body>
