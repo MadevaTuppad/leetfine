@@ -659,14 +659,14 @@
 
     <!-- LOG VIEW -->
     <div class="view active" id="view-log">
-      <div class="section-title">Who missed today?</div>
+      <div class="section-title">Who missed it?</div>
       <div class="avatar-grid" id="nameGrid"></div>
 
       <div class="section-title">When</div>
       <div class="date-card">
         <div class="pill-row">
-          <div class="pill" id="todayChip">Today</div>
           <div class="pill" id="yestChip">Yesterday</div>
+          <div class="pill" id="todayChip">Today</div>
         </div>
         <div class="date-custom">
           <input type="date" id="dateInput">
@@ -793,7 +793,7 @@
       document.getElementById('yestChip').classList.remove('active');
       if (chip) chip.classList.add('active');
     }
-    setDate(0, document.getElementById('todayChip'));
+    setDate(-1, document.getElementById('yestChip'));
     document.getElementById('todayChip').addEventListener('click', () => setDate(0, document.getElementById('todayChip')));
     document.getElementById('yestChip').addEventListener('click', () => setDate(-1, document.getElementById('yestChip')));
     dateInput.addEventListener('change', () => {
@@ -864,7 +864,7 @@
       amountInput.value = 100;
       amountInput.readOnly = true;
       amountToggle.classList.remove('on');
-      setDate(0, document.getElementById('todayChip'));
+      setDate(-1, document.getElementById('yestChip'));
     }
 
     /* dashboard */
